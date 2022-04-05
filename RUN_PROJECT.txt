@@ -1,0 +1,3 @@
+https://github.com/productioncoder/sequelize-tutorial
+nodemon
+https://github.com/ganeshmani/node-sequelize-tutorial
