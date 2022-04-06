@@ -1,1 +1,34 @@
-<h1>HOLA MUNDO</h1>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+<div class="container">
+  <div class="row" id="catalog">
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+<script>
+  
+  fetch('http://localhost:8080/books').then(function (response) {
+    return response.json();
+  }).then(function (data) {
+    // This is the JSON from our response
+    // console.log(data);
+    data.forEach(book => {
+      document.getElementById('catalog').innerHTML += `
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">${book.title}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Author: ${book.author}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Pages: ${book.totalPage}</h6>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+      </div>
+    `;
+    });
+  }).catch(function (err) {
+    // There was an error
+    console.warn('Something went wrong.', err);
+  });
+</script>

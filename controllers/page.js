@@ -20,7 +20,7 @@ module.exports = {
           id: req.params.id
         }
       });
-      if (page){
+      if (page.length > 0){
         res.send(page[0]);
       }else{
         res.status(404).send(e)

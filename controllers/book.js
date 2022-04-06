@@ -1,17 +1,17 @@
 // Import Book Model
 const Book = require('../models').Book;
 const Page = require('../models').Page;
- 
-module.exports = {
+
+module.exports =  {
   // Get all books
   async getAll(req,res) {
     try {
-      const book = await Book.findAll({include:Page});
-      if (book.length > 0) {
-      }else{
+      const book = await Book.findAll();
+      if (book.length == 0) {
         res.status(404).send({});
+      }else{
+        res.send(book);
       }
-      res.send(book);
     } catch (err) {
       console.log(err);
       res.status(500).send(e)
@@ -68,7 +68,7 @@ module.exports = {
       console.log(err);
       res.status(500).send(e)
     }
-  },
+  }
 }
 
  
