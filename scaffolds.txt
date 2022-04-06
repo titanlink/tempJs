@@ -1,1 +1,2 @@
-npx sequelize-cli model:generate --name Book --attributes title:string, author:string, description:string
+npx sequelize-cli model:generate --name Book --attributes title:string,author:string,description:string
+npx sequelize-cli model:generate --name Page --attributes content:string
