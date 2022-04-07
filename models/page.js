@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Page.init({
+    index: DataTypes.INTEGER,
     content: DataTypes.STRING,
   }, {
     sequelize,

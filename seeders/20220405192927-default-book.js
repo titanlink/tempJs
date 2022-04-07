@@ -12,7 +12,9 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     for (let index = 0; index < seedBooks.length; index++) {
       let item = seedBooks[index];
-      item.pages = Array(item.bookInfo.totalPage).fill({ bookId: item.bookInfo.id, content: content, createdAt: date, updatedAt: date  });
+      for (let pageIndex = 0; pageIndex < item.bookInfo.totalPage; pageIndex++) {
+        item.pages.push({ index:pageIndex ,bookId: item.bookInfo.id, content: content, createdAt: date, updatedAt: date  });
+      }
       await queryInterface.bulkInsert('Books', [
         item.bookInfo,
       ], {});

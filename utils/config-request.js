@@ -27,6 +27,10 @@ module.exports = class ConfigRequest {
   }
 
   configResponse(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Request-Method', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', '*');
     res.status = (status) => {
       res.writeHead(status);
       return res;
@@ -48,11 +52,8 @@ module.exports = class ConfigRequest {
       const currentMethod = this.myMethodsHttp[req.method];
       const dataUri = this.parserUri(this.myCallBack[req.method], uri);
       if (dataUri) {
-        console.log("uri llego", uri)
         uri = dataUri.__uri_real;
-        console.log("uri real es", uri);
         delete dataUri.__uri_real;
-        console.log("data dataUri es", dataUri);
         req.params = dataUri;
       }
 

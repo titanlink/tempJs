@@ -20,7 +20,6 @@ module.exports = {
   // Get book by id
   async getById(req,res) {
     try {
-      console.log("pasando")
       const book = await Book.findAll({
         where: {
           id: req.params.id
@@ -36,17 +35,36 @@ module.exports = {
       res.status(500).send(e)
     }
   },
-  // Get page by id
-  async getPageById(req,res) {
+  // Get page by index
+  async getPageByIndex(req,res) {
     try {
-      const book = await Page.findAll({
+      const pages = await Page.findAll({
         where: {
-          id: req.params.pageId,
+          index: req.params.pageId,
           bookId: req.params.id,
         }
       });
-      if (book.length > 0) {
-        res.send(book[0]);
+      if (pages.length > 0) {
+        res.send(pages[0]);
+      }else{
+        res.status(404).send({});
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(e)
+    }
+  },
+  // Get page by index with format
+  async getPageByIndexWithFormat(req,res) {
+    try {
+      const pages = await Page.findAll({
+        where: {
+          index: req.params.pageId,
+          bookId: req.params.id,
+        }
+      });
+      if (pages.length > 0) {
+        res.send(pages[0]);
       }else{
         res.status(404).send({});
       }
