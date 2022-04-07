@@ -2,16 +2,16 @@
 const Book = require('../models').Book;
 const Page = require('../models').Page;
 
-module.exports =  {
+module.exports = {
   // Get all books
   async getAll(req,res) {
     try {
-      const book = await Book.findAll();
-      if (book.length == 0) {
-        res.status(404).send({});
+      const book = await Book.findAll({include:Page});
+      if (book.length > 0) {
       }else{
-        res.send(book);
+        res.status(404).send({});
       }
+      res.send(book);
     } catch (err) {
       console.log(err);
       res.status(500).send(e)
@@ -20,6 +20,7 @@ module.exports =  {
   // Get book by id
   async getById(req,res) {
     try {
+      console.log("pasando")
       const book = await Book.findAll({
         where: {
           id: req.params.id
@@ -68,7 +69,6 @@ module.exports =  {
       console.log(err);
       res.status(500).send(e)
     }
-  }
+  },
 }
 
- 
