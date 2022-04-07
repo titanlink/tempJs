@@ -1,6 +1,7 @@
 // Import Book Model
 const Book = require('../models').Book;
 const Page = require('../models').Page;
+const DataFormater = require('../utils/data-formater.js');
 
 module.exports = {
   // Get all books
@@ -40,7 +41,7 @@ module.exports = {
     try {
       const pages = await Page.findAll({
         where: {
-          index: req.params.pageId,
+          index: req.params.pageIndex,
           bookId: req.params.id,
         }
       });
@@ -59,12 +60,13 @@ module.exports = {
     try {
       const pages = await Page.findAll({
         where: {
-          index: req.params.pageId,
+          index: req.params.pageIndex,
           bookId: req.params.id,
         }
       });
       if (pages.length > 0) {
-        res.send(pages[0]);
+        formater = new DataFormater();
+        res.send(formater.runConvert( req.params.format, pages[0].content ) );
       }else{
         res.status(404).send({});
       }
