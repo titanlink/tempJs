@@ -1,7 +1,7 @@
 // Import Book Model
 const Book = require('../models').Book;
 const Page = require('../models').Page;
- 
+
 module.exports = {
   // Get all books
   async getAll(req,res) {
@@ -20,6 +20,7 @@ module.exports = {
   // Get book by id
   async getById(req,res) {
     try {
+      console.log("pasando")
       const book = await Book.findAll({
         where: {
           id: req.params.id
@@ -71,4 +72,3 @@ module.exports = {
   },
 }
 
- 
